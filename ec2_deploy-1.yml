@@ -1,0 +1,19 @@
+---
+- name: Start ec2 instances
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  vars:
+    instance_ids:
+      - "i-00c70c211c0703967"
+      - "i-08134777f8af1250b"
+      - "i-0de136684a0fdd549"
+    region: eu-west-1
+  tasks:
+    - name: Start the ec2 instances
+      ec2:
+        instance_ids: '{{ instance_ids }}'
+        region: '{{ region }}'
+        state: running
+        wait: True
+        vpc_subnet_id: "subnet-c0c8bd88"
